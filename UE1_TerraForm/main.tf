@@ -13,13 +13,13 @@ provider "azurerm" {
   features { }
 }
 
-variable "resourceGroupId" {
+variable "resourceGroupName" {
   default = "learn-9fd43695-2111-4ab9-9b75-14c6ee0d357b" // works fine IF az account set --subscription=... is done
   type = string
 }
 
 data "azurerm_resource_group" "rg" {
-  name = var.resourceGroupId
+  name = var.resourceGroupName
 }
 
 variable "location" {
@@ -84,5 +84,5 @@ output "appServiceHostName" {
 // 2 - az account set --subscription=...
 // 3 - terraform init
 // 4 - terraform plan
-// 5 - terraform apply -var="resourceGroupId=[[NAME OF RESOURCE GROUP]]"
+// 5 - terraform apply -var="resourceGroupName=[[NAME OF RESOURCE GROUP]]"
 // add-on to above --> for me, the actual name worked to identify the resource group, not the ID

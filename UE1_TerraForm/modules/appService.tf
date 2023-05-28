@@ -21,7 +21,6 @@ variable environmentType{
 
 locals {
     appServicePlanSkuName = (var.environmentType == "prod") ? "P2v3" : "F1"
-    storageAccountSkuName = (var.environmentType == "prod") ? "GRS" : "LRS"
     alwaysOnSetting = (var.environmentType == "prod") ? true : false
 }
 
