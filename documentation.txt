@@ -1,0 +1,7 @@
+Biceps:
+- subscription in console setzen (az account set --subscription {{SUB-ID}})
+- resource group setzen (az configure --defaults group={{GROUP-NAME}})
+
+Biceps deployment mit Parameter-File:
+az deployment group create --template-file {{TEMPLATE-FILE}} --parameters {{PARAMFILE}} {{PARAM=VALUE}}
+file als erstes anführen, dann mit key=value pairs per Hand noch zusätzlich setzen

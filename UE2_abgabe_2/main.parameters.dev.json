@@ -1,0 +1,59 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "environmentName": {
+        "value": "Development"
+      },
+      "virtualNetworkAddressPrefix":{
+        "value":"10.10.0.0/16"
+      },
+      "locations":{
+        "value":[
+          "westeurope",
+          "eastus2",
+          "eastasia"
+        ]
+      },
+      "subnets":{
+        "value":[
+          {
+            "name":"frontend",
+            "ipAddressRange":"10.10.5.0/24"
+          },
+          {
+            "name":"backend",
+            "ipAddressRange":"10.10.10.0/24"
+          }
+        ]
+      },
+      "location": {
+        "value": "westus3"
+      },
+      "sqlDatabaseSku":{
+        "value":{
+          "name":"Standard",
+          "tier":"Standard"
+        }
+      },
+      "auditStorageAccountSkuName":{
+        "value":"Standard_LRS"
+      },
+      "sqlServerAdministratorLogin": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5/resourceGroups/SKCLAR1/providers/Microsoft.KeyVault/vaults/keyvaultnest832"
+          },
+          "secretName": "sqlServerAdministratorLogin"
+        }
+      },
+      "sqlServerAdministratorPassword": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5/resourceGroups/SKCLAR1/providers/Microsoft.KeyVault/vaults/keyvaultnest832"
+          },
+          "secretName": "sqlServerAdministratorPassword"
+        }
+      }
+    }
+  }
