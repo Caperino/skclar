@@ -14,7 +14,7 @@ provider "azurerm" {
 }
 
 variable "resourceGroupName" {
-  default = "learn-9fd43695-2111-4ab9-9b75-14c6ee0d357b" // works fine IF az account set --subscription=... is done
+  //default = "learn-9fd43695-2111-4ab9-9b75-14c6ee0d357b" // works fine IF az account set --subscription=... is done
   type = string
 }
 

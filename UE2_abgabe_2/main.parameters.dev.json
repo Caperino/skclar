@@ -27,9 +27,6 @@
           }
         ]
       },
-      "location": {
-        "value": "westus3"
-      },
       "sqlDatabaseSku":{
         "value":{
           "name":"Standard",

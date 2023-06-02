@@ -11,6 +11,9 @@
       "location": {
         "value": "westus3"
       },
+      "solutionName":{
+        "value":"toyhr"
+      },
       "sqlDatabaseName": {
         "value": "Employees"
       },
