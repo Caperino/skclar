@@ -10,16 +10,13 @@ start=$(date +%s)
 ########## Start of variable Definition ##############
 
 #define a subscription
-subscription=d37916a3-39b8-4997-9b15-fc268bf8f4a7
+subscription=c42c6aa8-3c10-40e5-a3ff-ba5843e3dda5
 
 #set subscription
 az account set --subscription $subscription
 
 # Resource Group Name
-resourceGroupName=RG-LoadBalancer-UE3
-
-#define resource group 
-#az configure --defaults group=LoadBalancer
+resourceGroupName=CLINF-GL_Kappel
 
 #public vNet Name
 vNetName=LoadBalancer-vNet
@@ -99,15 +96,15 @@ az vm availability-set create --name $availabilitySetName --resource-group $reso
 #create VM's (Win2022Datacenter, Standard_B1) within the availability set within a for loop
 for COUNT in $(seq 1 $numberOfVMs)
 do
-    az vm create --name $vmNamePrefix-$COUNT --resource-group $resourceGroupName --location $location --availability-set $availabilitySetName --nsg $nsgName --image Win2022Datacenter --size Standard_B1s --admin-username $vmAdminUser --admin-password $vmAdminPassword --vnet-name $vNetName --subnet $subnetName --private-ip-address ${internalIpArray[$COUNT-1]} --public-ip-address "" --no-wait
+    az vm create --name $vmNamePrefix-$COUNT --resource-group $resourceGroupName --location $location --availability-set $availabilitySetName --nsg $nsgName --image Win2022Datacenter --size Standard_B2s --admin-username $vmAdminUser --admin-password $vmAdminPassword --vnet-name $vNetName --subnet $subnetName --private-ip-address ${internalIpArray[$COUNT-1]} --public-ip-address ""
 done
 
 # Extend VM's with IIS Server and a simple html file to display the name of the VM
 for COUNT in $(seq 1 $numberOfVMs)
 do
     az vm run-command invoke -g $resourceGroupName -n $vmNamePrefix-$COUNT --command-id RunPowerShellScript --scripts "Install-WindowsFeature -name Web-Server -IncludeManagementTools"
-    az vm run-command invoke -g $resourceGroupName -n $vmNamePrefix-$COUNT --command-id RunPowerShellScript --scripts "Remove-Item -Path 'C:\inetpub\wwwroot\iisstart.htm'"
-    az vm run-command invoke -g $resourceGroupName -n $vmNamePrefix-$COUNT --command-id RunPowerShellScript --scripts "Add-Content -Path 'C:\inetpub\wwwroot\iisstart.htm' -Value '$env:computername'"
+    az vm run-command invoke -g $resourceGroupName -n $vmNamePrefix-$COUNT --command-id RunPowerShellScript --scripts "Remove-Item -Path C:\inetpub\wwwroot\iisstart.htm"
+    az vm run-command invoke -g $resourceGroupName -n $vmNamePrefix-$COUNT --command-id RunPowerShellScript --script "powershell.exe Add-Content -Path C:\inetpub\wwwroot\iisstart.htm -Value \$env:Computername"
 done
 
 
