@@ -112,12 +112,6 @@ do
     az vm run-command invoke -g $resourceGroupName -n $vmNamePrefix-$COUNT --command-id RunPowerShellScript --script "powershell.exe Add-Content -Path C:\inetpub\wwwroot\iisstart.htm -Value \$env:Computername"
 done
 
-#calculate execution time
-end=$(date +%s)
-runtime=$((end-start))
-echo "The execution time was $runtime seconds"
-
-
 # AppGateway Config
 az network vnet subnet create --name $appGatewaySubnetName --resource-group $resourceGroupName --vnet-name $vNetName --address-prefixes $appGatewaySubnetAddressPrefix
 
@@ -126,3 +120,8 @@ az network public-ip create --name $appGatewayPublicIpName --resource-group $res
 
 # create Gateway itself
 az network application-gateway create -g $resourceGroupName -n $appGatewayName --frontend-port 80 --location $location --max-capacity 3 --priority 1 --public-ip-address $appGatewayPublicIpName --sku Standard_v2 --subnet $appGatewaySubnetName --vnet-name $vNetName --http-settings-protocol Http --servers $ipsAsString
+
+#calculate execution time
+end=$(date +%s)
+runtime=$((end-start))
+echo "The execution time was $runtime seconds"
