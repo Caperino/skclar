@@ -117,10 +117,10 @@ echo "The execution time was $runtime seconds"
 
 
 # AppGateway Config
-az network vnet subnet create --name $appGatewaySubnetName --resource-group $resourceGroupName --vnet-name $vNetName --address-prefixes $appGatewaySubnetAddressPrefix
+#az network vnet subnet create --name $appGatewaySubnetName --resource-group $resourceGroupName --vnet-name $vNetName --address-prefixes $appGatewaySubnetAddressPrefix
 
 # Public IP
-az network public-ip create --name $appGatewayPublicIpName --resource-group $resourceGroupName --location $location --allocation-method Static --sku Standard --tier Regional --version IPv4
+#az network public-ip create --name $appGatewayPublicIpName --resource-group $resourceGroupName --location $location --allocation-method Static --sku Standard --tier Regional --version IPv4
 
 # BE Pool creation
 # az network application-gateway address-pool create --gateway-name $appGatewayName --name $appGatewayBackendPoolName --resource-group $resourceGroupName
@@ -136,4 +136,4 @@ az network public-ip create --name $appGatewayPublicIpName --resource-group $res
 #az network application-gateway frontend-ip create --gateway-name $appGatewayName --name $appGatewayFrontendName --resource-group $resourceGroupName --public-ip-address $appGatewayPublicIpName
 
 # create Gateway itself
-az network application-gateway create -g $resourceGroupName -n $appGatewayName --frontend-port 80 --location $location --max-capacity 3 --priority 1 --public-ip-address $appGatewayPublicIpName --sku Standard_v2 --subnet $appGatewaySubnetName --vnet-name $vNetName --http-settings-protocol Http --servers $ipsAsString
+#az network application-gateway create -g $resourceGroupName -n $appGatewayName --frontend-port 80 --location $location --max-capacity 3 --priority 1 --public-ip-address $appGatewayPublicIpName --sku Standard_v2 --subnet $appGatewaySubnetName --vnet-name $vNetName --http-settings-protocol Http --servers $ipsAsString
